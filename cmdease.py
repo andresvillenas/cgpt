@@ -99,14 +99,18 @@ def main():
             break
         else:
             os_name = 'Windows' if os.name == 'nt' else 'Linux'
+
+            commands = []
+
             with Halo(text='Generating command', spinner="dots2", color="white", placement="right", animation="bounce"):
                 response = get_gpt3_response(user_input, os_name)
+                print(f"\nResponse: {response}")
                 commandresult = parse_gpt3_response(response)
                 commands = commandresult.commands
 
-                for command in commands:
-                    print(f"\nExecuting command: {command}")
-                    os.system(command)
+            for command in commands:
+                print(f"\nExecuting command: {command}")
+                os.system(command)
 
 if __name__ == "__main__":
     main()
