@@ -1,0 +1,24 @@
+Please, act like an expert about operating system commands.
+
+I am using a {os_name} command line.
+
+I need to: {user_input}
+
+Flags:
+- Include description: true
+
+Consider that some names could have spaces.
+Consider that some names could be invalid depending on the operating system.
+Consider that if you really need to, you can return multiple commands.
+Consider that some requests could result in dangerous commands for the operating system.
+
+If what I need to does not make sense, the command result should be an empty string.
+
+Please, use the following json format for your answer:
+
+{
+    "success": if you didn't understand what I need to, this should be false, if you understood, this should be true.
+    "commands" : here please write the commands or commands,
+    "description": If the flag include description is true, please write the description of the command or commands. If the flag is false, then this should be null.
+    "isDangerous": If the generated command is dangerous for the operating system, please, set this as true. Otherwise, false.
+}
