@@ -1,15 +1,22 @@
 import os
 import openai
 import json
+import argparse
+import sys
+import configparser
+
 from halo import Halo
 
-from dotenv import load_dotenv
+print(os.path.abspath(os.path.join(os.path.dirname(__file__), 'config.ini')))
 
 from commandresult import CommandResult
 
-load_dotenv()
+# Set up the configparser to read from config.ini
+config = configparser.ConfigParser()
+config.read(os.path.join(os.path.dirname(__file__), 'config.ini'))
 
-openai.api_key = os.getenv('OPENAI_API_KEY')
+openai_api_key = config.get('openai', 'api_key')
+openai.api_key = openai_api_key
 
 prompts_folder = "prompts"
 default_prompt_file = "default.prmp"
@@ -22,6 +29,15 @@ def load_prompt(prompt_file=default_prompt_file, **kwargs):
     :param kwargs: Any keyword arguments representing placeholders and their values.
     :return: The prompt as a string with placeholders replaced by values.
     """
+
+    # Get the path to the prompts directory
+    if getattr(sys, 'frozen', False):
+        # If running from a standalone executable, use the _MEIPASS directory
+        prompts_folder = os.path.join(sys._MEIPASS, 'prompts')
+    else:
+        # If running from a development environment, use the prompts directory in the current directory
+        prompts_folder = os.path.join(os.path.dirname(__file__), 'prompts')
+
     # Construct the full path to the prompt file
     prompt_path = os.path.join(prompts_folder, prompt_file)
 
@@ -92,25 +108,28 @@ def parse_commands_text(commands_text):
     return commands
 
 
-def main():
-    while True:
-        user_input = input("CmdEase> ")
-        if user_input.lower() == "exit":
-            break
-        else:
-            os_name = 'Windows' if os.name == 'nt' else 'Linux'
+def main(user_input):
+    os_name = 'Windows' if os.name == 'nt' else 'Linux'
 
-            commands = []
+    commands = []
 
-            with Halo(text='Generating command', spinner="dots2", color="white", placement="right", animation="bounce"):
-                response = get_gpt3_response(user_input, os_name)
-                print(f"\nResponse: {response}")
-                commandresult = parse_gpt3_response(response)
-                commands = commandresult.commands
+    with Halo(text='Generating command', spinner="dots2", color="white", placement="right", animation="bounce"):
+        response = get_gpt3_response(user_input, os_name)
+        print(f"\nResponse: {response}")
+        commandresult = parse_gpt3_response(response)
+        commands = commandresult.commands
 
-            for command in commands:
-                print(f"\nExecuting command: {command}")
-                os.system(command)
+    for command in commands:
+        print(f"\nExecuting command: {command}")
+        os.system(command)
+
+# Set up the command line argument parser
+parser = argparse.ArgumentParser(description="Command-line interface for expert OS commands")
+parser.add_argument("-i", "--input", type=str, required=True, help="The user input command")
+
+# Parse the command line arguments
+args = parser.parse_args()
+
 
 if __name__ == "__main__":
-    main()
+    main(user_input=args.input)
