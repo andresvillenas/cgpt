@@ -3,20 +3,15 @@ import openai
 import json
 import argparse
 import sys
-import configparser
 
 from halo import Halo
 
-print(os.path.abspath(os.path.join(os.path.dirname(__file__), 'config.ini')))
+from domain.commandresult import CommandResult
+from config.settings import Config
 
-from commandresult import CommandResult
+config = Config()
 
-# Set up the configparser to read from config.ini
-config = configparser.ConfigParser()
-config.read(os.path.join(os.path.dirname(__file__), 'config.ini'))
-
-openai_api_key = config.get('openai', 'api_key')
-openai.api_key = openai_api_key
+openai.api_key = config.openai.api_key
 
 prompts_folder = "prompts"
 default_prompt_file = "default.prmp"
@@ -115,7 +110,6 @@ def main(user_input):
 
     with Halo(text='Generating command', spinner="dots2", color="white", placement="right", animation="bounce"):
         response = get_gpt3_response(user_input, os_name)
-        print(f"\nResponse: {response}")
         commandresult = parse_gpt3_response(response)
         commands = commandresult.commands
 

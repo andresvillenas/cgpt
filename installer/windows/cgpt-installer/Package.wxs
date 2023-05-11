@@ -1,0 +1,9 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="cgpt" Manufacturer="Ecuasoft" Version="1.0.0.0" UpgradeCode="848ecaa5-3d51-4d95-9629-a4dc7d3a4979">
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+
+    <Feature Id="Main">
+      <ComponentGroupRef Id="MainComponents" />
+    </Feature>
+  </Package>
+</Wix>
