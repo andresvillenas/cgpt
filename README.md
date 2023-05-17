@@ -13,7 +13,7 @@ cgpt is your friendly command line helper! Powered by OpenAI, cgpt simplifies yo
 ## Installation 📦
 
 ### Windows
-1. Download the latest cgpt-installer.exe from the [releases]() page.
+1. Download the latest cgpt-installer.exe from the [releases](https://github.com/andresvillenas/cgpt/releases) page.
 2. Run the installer and follow the prompts to install cgpt.
    - You will be asked to enter your OpenAI API key during the installation process.
    - The installer will add the cgpt installation directory to your system's PATH, allowing you to run cgpt from the command line.
