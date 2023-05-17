@@ -37,6 +37,41 @@ Source: "{#MyAppSourcePath}\config.ini"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Code]
+var
+  ApiKeyPage: TInputQueryWizardPage;
+
+procedure InitializeWizard;
+begin
+  ApiKeyPage := CreateInputQueryPage(wpWelcome,
+    'OpenAI API Key', 'Please enter your OpenAI API key.',
+    'Please enter your API key, then click Next.');
+  ApiKeyPage.Add('API Key:', True);
+end;
+
+procedure UpdateConfigFile(FileName: string; Placeholder: string; Value: string);
+var
+  Lines: TStringList;
+  i: Integer;
+  S: string;
+begin
+  Lines := TStringList.Create();
+  try
+    Lines.LoadFromFile(FileName);
+    for i := 0 to Lines.Count - 1 do begin
+      S := Lines[i];
+      if Pos(Placeholder, S) > 0 then begin
+        StringChangeEx(S, Placeholder, Value, True);
+        Lines[i] := S;
+      end;
+    end;
+    Lines.SaveToFile(FileName);
+  finally
+    Lines.Free();
+  end;
+end;
+
+
+
 procedure AddToPath();
 var
   Path: string;
@@ -55,7 +90,6 @@ begin
   if CurStep = ssPostInstall then
   begin
     AddToPath();
+    UpdateConfigFile(ExpandConstant('{app}\config.ini'), 'Your KEY HERE.', ApiKeyPage.Values[0]);
   end;
 end;
-
-
