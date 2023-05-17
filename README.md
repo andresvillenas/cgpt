@@ -10,9 +10,16 @@ cgpt is your friendly command line helper! Powered by OpenAI, cgpt simplifies yo
 - 📖 Explain Mode: Provides explanations for generated commands.
 - 🛡️ Safe: Always asks for confirmation before executing commands, with additional warnings for potentially dangerous operations.
 
-## Installation 💽
+## Installation 📦
 
-(Put your installation instructions here)
+### Windows
+1. Download the latest cgpt-installer.exe from the [releases]() page.
+2. Run the installer and follow the prompts to install cgpt.
+   - You will be asked to enter your OpenAI API key during the installation process.
+   - The installer will add the cgpt installation directory to your system's PATH, allowing you to run cgpt from the command line.
+3. Once the installation process is complete, you can verify that cgpt was installed correctly by opening a new command prompt window and running cgpt.
+   
+Please note that updating your cgpt installation to a new version is as simple as running the new installer — there's no need to manually uninstall the old version first.
 
 ## Usage 🚦
 
