@@ -33,13 +33,16 @@ If you want an explanation of the generated command, use the -e or --explain fla
 cgpt -i "create a new directory called test" -e
 ```
 
+## Demo
+<video src="documentation/assets/demo-1.mp4" controls title="Demo-1"></video>)
+
 If the command can potentially affect your system, CGPT will warn you and ask for confirmation before proceeding.
 
 ## Development 🛠️
 (Put your instructions for setting up the development environment here)
 
 ## Contributing 🤝
-We welcome contributions from everyone. Please read our [contributing guide](CONTRIBUTING.md) to get started.
+We welcome contributions from everyone. Please read our [contributing guide](documentation/CONTRIBUTING.md) to get started.
 
 ## License
 
