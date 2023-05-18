@@ -34,7 +34,7 @@ cgpt -i "create a new directory called test" -e
 ```
 
 ## Demo
-<video src="documentation/assets/demo-1.mp4" controls title="Demo-1"></video>)
+<video src="https://github.com/andresvillenas/cgpt/raw/main/documentation/assets/demo-1.mp4" controls title="Demo-1"></video>
 
 If the command can potentially affect your system, CGPT will warn you and ask for confirmation before proceeding.
 
