@@ -10,6 +10,9 @@ cgpt is your friendly command line helper! Powered by OpenAI, cgpt simplifies yo
 - 📖 Explain Mode: Provides explanations for generated commands.
 - 🛡️ Safe: Always asks for confirmation before executing commands, with additional warnings for potentially dangerous operations.
 
+## Demo
+[![Demo Video](https://i.ytimg.com/vi/7__2znMs78Y/hqdefault.jpg?sqp=-oaymwE2CNACELwBSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgB0AmAAtAFigIMCAAQARg6IEgofzAP&rs=AOn4CLAiAWnAxl9LiuHjGs5KOvuOYpY0AQ)](https://www.youtube.com/watch?v=7__2znMs78Y)
+
 ## Installation 📦
 
 ### Windows
