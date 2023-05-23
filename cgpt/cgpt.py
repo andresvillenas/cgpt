@@ -10,28 +10,31 @@ from promptservice import PromptService
 config = Config()
 
 
-def get_commands(user_input, gptService, prompt_service, response_parser):
+def get_commands(user_input, explain, gptService, prompt_service, response_parser):
     with Halo(text='Generating command', spinner="dots2", color="white", placement="right", animation="bounce"):
-        prompt = prompt_service.load_prompt(user_input=user_input)
+        prompt = prompt_service.load_prompt(user_input=user_input, include_explanation=explain)
         response = gptService.get_response(prompt)
         commandresult = response_parser.parse_gpt_command(response)
         return commandresult
 
 
-def execute_commands(commandresult, explain=False):
-    if explain:
-        print(commandresult.description)
-
+def execute_commands(commandresult):
     if commandresult.is_dangerous:
-        print("⚠️ Warning: This command is dangerous and may cause harm to your system. Please use with caution.")
+        print("⚠️  Warning: This command is dangerous and may cause harm to your system. Please use with caution.")
 
-    print(f"\nCommand: {commandresult.command_text}")
+    print(f"Command(s) generated:\n{commandresult.command_text}")
+    if commandresult.explanation is not None :
+        print(f"\n🏫  Explanation:\n{commandresult.explanation}\n")
 
     confirm = input("Do you want to proceed? (yes/no): ")
     if confirm.lower() in ["yes", "y"]:
         for command in commandresult.commands:
-            print(f"\nExecuting command: {command}")
-            os.system(command)
+            print(f"▶️  Executing command: {command}")
+            return_code = os.system(command)
+            if return_code != 0:
+                print(f"❌  Command failed with return code: {return_code}")
+                print("Execution aborted.")
+                return
     else:
         print("Command not executed.")
 
@@ -43,21 +46,30 @@ def main(user_input, explain):
         config.prompts.prompts_folder, config.prompts.default_prompt_file)
     response_parser = ResponseParser()
 
-    commandresult = get_commands(
-        user_input, gptService, prompt_service, response_parser)
+    commandresult = get_commands(user_input, explain, gptService, prompt_service, response_parser)
 
-    execute_commands(commandresult, explain)
-
+    if commandresult is not None:
+        execute_commands(commandresult)
+    else:
+        print("Command not executed.")
 
 # Set up the command line argument parser
 parser = argparse.ArgumentParser(description="cgpt - Command GPT")
-parser.add_argument("-i", "--input", type=str,
-                    required=True, help="The user input command")
-parser.add_argument("-e", "--explain", action='store_true',
-                    required=False, help="To explain the command")
+
+# Add the positional argument for input without specifying any flags
+parser.add_argument("input", nargs="+", type=str, help="The user input command")
+
+# Add the optional -e flag for explanation
+parser.add_argument("-e", "--explain", action='store_true', help="To explain the command")
 
 # Parse the command line arguments
 args = parser.parse_args()
 
+# Check if the -e flag is provided
+is_explain_mode = args.explain
+
+# Access the value of the input as a single string
+user_input = " ".join(args.input)
+
 if __name__ == "__main__":
-    main(user_input=args.input, explain=args.explain)
+    main(user_input=user_input, explain=is_explain_mode)

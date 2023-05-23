@@ -11,7 +11,7 @@ class PromptService:
         self.prompts_folder = prompts_folder
         self.default_prompt_file = default_prompt_file
 
-    def load_prompt(self, user_input):
+    def load_prompt(self, user_input, include_explanation):
         """
         Loads the prompt from the default prompt file and replaces the placeholders with the appropriate values
 
@@ -38,5 +38,7 @@ class PromptService:
 
         prompt = prompt.replace("{os_name}", os_name)
         prompt = prompt.replace("{user_input}", user_input)
+        prompt = prompt.replace("{include_explanation}", str(include_explanation))
+
 
         return prompt
