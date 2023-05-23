@@ -11,7 +11,7 @@ cgpt is your friendly command line helper! Powered by OpenAI, cgpt simplifies yo
 - 🛡️ Safe: Always asks for confirmation before executing commands, with additional warnings for potentially dangerous operations.
 
 ## Demo
-[![Demo Video](https://i.ytimg.com/vi/7__2znMs78Y/hqdefault.jpg?sqp=-oaymwE2CNACELwBSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgB0AmAAtAFigIMCAAQARg6IEgofzAP&rs=AOn4CLAiAWnAxl9LiuHjGs5KOvuOYpY0AQ)](https://www.youtube.com/watch?v=7__2znMs78Y)
+https://github.com/andresvillenas/cgpt/assets/4082342/b3cd1f8f-f72c-48f4-8939-40d4a0899f0a
 
 ## Installation 📦
 
