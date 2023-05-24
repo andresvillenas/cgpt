@@ -20,6 +20,7 @@ class ResponseParser:
             return None
 
         try:
+
             # Extract the command result from the dictionary
             success = response_dict.get("success", False)
             commands = response_dict.get("commands", "")

@@ -1,5 +1,6 @@
 import os
 import sys
+from jinja2 import Template
 
 
 class PromptService:
@@ -16,6 +17,7 @@ class PromptService:
         Loads the prompt from the default prompt file and replaces the placeholders with the appropriate values
 
         :param user_input: The user input command
+        :param include_explanation: Whether to include the explanation in the prompt
         :return: The prompt
         """
 
@@ -34,11 +36,10 @@ class PromptService:
 
         # Read the prompt from the file
         with open(prompt_path, "r") as f:
-            prompt = f.read()
+            prompt_template = f.read()
 
-        prompt = prompt.replace("{os_name}", os_name)
-        prompt = prompt.replace("{user_input}", user_input)
-        prompt = prompt.replace("{include_explanation}", str(include_explanation))
+        template = Template(prompt_template)
 
+        prompt = template.render(os_name=os_name, user_input=user_input, include_explanation=include_explanation)
 
         return prompt
