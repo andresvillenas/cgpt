@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 #define MyAppSourcePath ExtractFilePath(GetEnv("ScriptPath")) + "..\..\cgpt\dist"
 #define MyAppName "cgpt"
-#define MyAppVersion "0.1"
+#define MyAppVersion "0.2"
 #define MyAppPublisher "avillenas.com"
 #define MyAppURL "https://avillenas.com/"
 #define MyAppExeName "cgpt.exe"
