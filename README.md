@@ -44,7 +44,7 @@ Comming soon
 We welcome contributions from everyone. Please read our [contributing guide](documentation/CONTRIBUTING.md) to get started.
 
 ## License
-
+CGPT is licensed under the [MIT License](LICENSE.txt).
 
 ## Acknowledgements 🙏
 CGPT uses the following open source software:
