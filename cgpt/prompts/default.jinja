@@ -6,12 +6,10 @@ Please, use the following JSON format for your answer.
     "commands": ~Array of commands~,
     {% if include_explanation %}
     "explanation": ~Summary of the commands, short text~,
-    {% else %}
-    "explanation": ~Return a null value here~,
     {% endif %}
     "isDangerous": ~If the generated command is dangerous for the operating system, this should be True~.
 }
 
-Please, the answer MUST be a valid JSON string. 
+Please, the answer MUST be ONLY a valid JSON string. 
 
 Answer:

@@ -14,7 +14,6 @@ class Config:
         def __init__(self, config):
             self.prompts_folder = config['prompts']['prompts_folder']
             self.default_prompt_file = config['prompts']['default_prompt_file']
-            self.prompt_file_extension = config['prompts']['prompt_file_extension']
 
     def __init__(self):
         # Initialize configparser

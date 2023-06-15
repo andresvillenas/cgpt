@@ -20,11 +20,10 @@ class ResponseParser:
             return None
 
         try:
-
             # Extract the command result from the dictionary
             success = response_dict.get("success", False)
             commands = response_dict.get("commands", "")
-            explanation = response_dict.get("explanation", "")
+            explanation = response_dict.get("explanation", None)
             is_dangerous = response_dict.get("isDangerous", False)
         except KeyError as e:
             print(f"Failed to extract key from the response: {e}, response: {response}")

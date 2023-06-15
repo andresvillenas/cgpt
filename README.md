@@ -29,16 +29,16 @@ Please note that updating your cgpt installation to a new version is as simple a
 Once installed, you can start using CGPT by entering commands like so:
 
 ```shell
-cgpt -i "create a new directory called test"
+cgpt "create a new directory called test" # the -i parameter is not required anymore since v0.2.0
 ```
 If you want an explanation of the generated command, use the -e or --explain flag:
 ```shell
-cgpt -i "create a new directory called test" -e
+cgpt "create a new directory called test" -e
 ```
 If the command can potentially affect your system, CGPT will warn you and ask for confirmation before proceeding.
 
 ## Development 🛠️
-(Put your instructions for setting up the development environment here)
+Comming soon
 
 ## Contributing 🤝
 We welcome contributions from everyone. Please read our [contributing guide](documentation/CONTRIBUTING.md) to get started.

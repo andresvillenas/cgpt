@@ -24,9 +24,9 @@ def execute_commands(commandresult):
 
     print(f"Command(s) generated:\n{commandresult.command_text}")
     if commandresult.explanation is not None :
-        print(f"\n🏫  Explanation:\n{commandresult.explanation}\n")
+        print(f"\n🏫  Explanation:\n{commandresult.explanation}")
 
-    confirm = input("Do you want to proceed? (yes/no): ")
+    confirm = input("\nDo you want to proceed? (yes/no): ")
     if confirm.lower() in ["yes", "y"]:
         for command in commandresult.commands:
             print(f"▶️  Executing command: {command}")
