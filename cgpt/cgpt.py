@@ -1,5 +1,5 @@
-import os
 import argparse
+import subprocess
 
 from halo import Halo
 from responseparser import ResponseParser
@@ -28,13 +28,14 @@ def execute_commands(commandresult):
 
     confirm = input("\nDo you want to proceed? (yes/no): ")
     if confirm.lower() in ["yes", "y"]:
-        for command in commandresult.commands:
-            print(f"▶️  Executing command: {command}")
-            return_code = os.system(command)
-            if return_code != 0:
-                print(f"❌  Command failed with return code: {return_code}")
-                print("Execution aborted.")
-                return
+        process = subprocess.Popen(" && ".join(commandresult.commands), shell=True)
+        process.wait()
+        if process.returncode != 0:
+            print(f"❌  Command(s) failed with return code: {process.returncode}")
+            print("Execution aborted.")
+            return
+        else:
+            print("✅  Commands executed successfully.")
     else:
         print("Command not executed.")
 
